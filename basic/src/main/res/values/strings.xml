@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">basic</string>
+    <string name="randomize">Randomize</string>
+    <string name="send">Send</string>
+    <string name="get_random_number">Get random number</string>
+</resources>
