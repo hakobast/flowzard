@@ -10,7 +10,8 @@ Survives configuration changes, can save his state and restore after process kil
 Gradle:
 
 ```groovy
-implementation 'com.squareup.flow:flow:1.0.0-alpha3'
+implementation 'com.github.hakobast:flowzard:0.1'
+
 ```
 
 Create flows.
