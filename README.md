@@ -1,11 +1,16 @@
-# Flowzard Features
+# Flowzard
+[ ![Download](https://api.bintray.com/packages/hakob/maven/flowzard/images/download.svg?version=0.1) ](https://bintray.com/hakob/maven/flowzard/0.1/link)
+[![Android Weekly](https://img.shields.io/badge/Android%20Weekly-343-green.svg)](http://androidweekly.net/issues/issue-343)
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Flowzard-brightgreen.svg?style=flat)](https://android-arsenal.com/details/1/7425)
+
+# Features
 Isolates navigation from UI and Business logic by providing simple navigation mechanism.
 
 Encapsulates exact implementation. It means navigation can be organized across Activities, Fragments or Views.
 
 Survives configuration changes, can save his state and restore after process kill.
 
-## Using Flow
+## Usage
 
 Gradle:
 
@@ -124,7 +129,7 @@ fun setMessageListener(code: String, listener: MessageHandler) // register to me
 fun removeMessageListener(code: String) // unregister from messages in screen.
 ```
 
-Navigation in flow between screens via Router.kt using Navigator.kt which must be provided(for example in FlowActivity.kt).
+Navigation in flow between screens via Router using kotlin version of [Cicerone](https://github.com/terrakok/Cicerone).
 ```kotlin
 fun navigateTo(screenKey: String, data: Any? = null) // adds new screen to backstack
 fun replace(screenKey: String, data: Any? = null) // replaces current screen with new one
@@ -141,3 +146,12 @@ The Api built having in mind configuration change and process death problems. Fl
 ## Sample projects
 
 * [Basic Sample](basic) - Fully configured Flow.
+
+## Contact
+
+- **Email**: hakob.astvacatryan@gmail.com
+- **Twitter**: https://twitter.com/hak_ast
+
+## Thanks
+
+* Special thanks to guys who created [Cicerone](https://github.com/terrakok/Cicerone) for big inspiration.
