@@ -11,7 +11,6 @@ class DefaultFlowManager : FlowManager() {
 
 	override fun createFlow(id: String): Flow {
 		return when (id) {
-			Flows.MAIN -> MainFlow(this)
 			Flows.RANDOM_NUMBER -> RandomNumberFlow(this)
 			else -> throw RuntimeException("Cannot find flow for id=$id")
 		}
