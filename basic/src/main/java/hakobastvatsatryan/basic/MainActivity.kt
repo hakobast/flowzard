@@ -10,29 +10,32 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FlowActivity() {
 
-	override val navigator: Navigator
-		get() = object : SimpleFlowNavigator(this) {
+    override val navigator: Navigator
+        get() = object : SimpleFlowNavigator(this) {
 
-			override fun getActivityIntent(id: String, data: Any?): Intent {
-				return when (id) {
-					Flows.RANDOM_NUMBER -> Intent(activity, RandomNumberActivity::class.java)
-					else -> throw RuntimeException("Cannot find activity for id=$id")
-				}
-			}
-		}
+            override fun getActivityIntent(id: String, data: Any?): Intent {
+                return when (id) {
+                    Flows.RANDOM_NUMBER -> Intent(activity, RandomNumberActivity::class.java)
+                    else -> throw RuntimeException("Cannot find activity for id=$id")
+                }
+            }
+        }
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		setContentView(R.layout.activity_main)
+    override val isMain: Boolean
+        get() = true
 
-		getRandomNumberButton.setOnClickListener {
-			flow.sendMessage(MainMessage.code, MainMessage.OnGetRandomNumberClicked)
-		}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-		setMessageListener(MainMessage.code) {
-			if (it is MainMessage.NumberResult) {
-				numberTextView.text = it.value.toString()
-			}
-		}
-	}
+        getRandomNumberButton.setOnClickListener {
+            flow.sendMessage(MainMessage.code, MainMessage.OnGetRandomNumberClicked)
+        }
+
+        setMessageListener(MainMessage.code) {
+            if (it is MainMessage.NumberResult) {
+                numberTextView.text = it.value.toString()
+            }
+        }
+    }
 }

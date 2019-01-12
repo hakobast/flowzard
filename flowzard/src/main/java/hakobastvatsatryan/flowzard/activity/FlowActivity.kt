@@ -13,50 +13,51 @@ import hakobastvatsatryan.flowzard.router.Navigator
 
 abstract class FlowActivity : AppCompatActivity(), FlowProvider {
 
-	private lateinit var flowActivityDelegate: FlowActivityDelegate
+    private lateinit var flowActivityDelegate: FlowActivityDelegate
 
-	override val flow: Flow
-		get() = flowActivityDelegate.flow
+    override val flow: Flow
+        get() = flowActivityDelegate.flow
 
-	abstract val navigator: Navigator
+    abstract val navigator: Navigator
+    open val isMain: Boolean = false
 
-	private val lazyNav: Navigator by lazy {
-		navigator
-	}
+    private val lazyNav: Navigator by lazy {
+        navigator
+    }
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		flowActivityDelegate = FlowActivityDelegate(this, lazyNav)
-		flowActivityDelegate.onCreate(savedInstanceState)
-	}
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        flowActivityDelegate = FlowActivityDelegate(this, lazyNav, isMain)
+        flowActivityDelegate.onCreate(savedInstanceState)
+    }
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-		super.onActivityResult(requestCode, resultCode, data)
-		flowActivityDelegate.onActivityResult(requestCode, resultCode, data)
-	}
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        flowActivityDelegate.onActivityResult(requestCode, resultCode, data)
+    }
 
-	override fun onPause() {
-		super.onPause()
-		flowActivityDelegate.onPause()
-	}
+    override fun onPause() {
+        super.onPause()
+        flowActivityDelegate.onPause()
+    }
 
-	override fun onResume() {
-		super.onResume()
-		flowActivityDelegate.onResume()
-	}
+    override fun onResume() {
+        super.onResume()
+        flowActivityDelegate.onResume()
+    }
 
-	override fun onDestroy() {
-		super.onDestroy()
-		flowActivityDelegate.onDestroy()
-	}
+    override fun onDestroy() {
+        super.onDestroy()
+        flowActivityDelegate.onDestroy()
+    }
 
-	fun setMessageListener(code: String, listener: MessageHandler) {
-		flow.setMessageListener(code, listener)
-		lifecycle.addObserver(object : LifecycleObserver {
-			@OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-			fun onDestroy() {
-				flow.removeMessageListener(code)
-			}
-		})
-	}
+    fun setMessageListener(code: String, listener: MessageHandler) {
+        flow.setMessageListener(code, listener)
+        lifecycle.addObserver(object : LifecycleObserver {
+            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+            fun onDestroy() {
+                flow.removeMessageListener(code)
+            }
+        })
+    }
 }

@@ -13,7 +13,8 @@ import hakobastvatsatryan.flowzard.Result
 
 class FlowActivityDelegate(
 		val activity: Activity,
-		val navigator: Navigator
+		val navigator: Navigator,
+		val isMain: Boolean
 ) {
 	lateinit var flowRoot: FlowRoot
 
@@ -26,8 +27,6 @@ class FlowActivityDelegate(
 		get() {
 			return (activity.applicationContext as FlowManagerProvider).getProvideManager()
 		}
-
-	private val isMain = activity.intent?.action == Intent.ACTION_MAIN
 
 	fun onCreate(savedInstanceState: Bundle?) {
 		flowRoot = if (isMain) {
